@@ -1,0 +1,124 @@
+{% extends 'profile_user/base_index.html' %}
+
+{% load static %}
+{% block title %}{{user.username}}{% endblock %}
+
+
+        {% block content %}
+            <a href="{% url 'playlists' %}" ><h1>Плейлисты</h1></a>
+            <div class="playlists">
+<!--                <a class="previous_playlist"></a>-->
+<!--                <a class="next_playlist"></a>-->
+                {% for playlist in playlists %}
+                    <div class="block_playlist">
+                        <div class="ten2">
+                            <img class="ten" src="/media/{{playlist.photo}}">
+                        </div>
+                        <div class="ten"></div>
+                        <div class="photo_playlist">
+
+                            <img src="/media/{{playlist.photo}}">
+                            <button value="A-AP Rocky-Wassup-kissvk.com" class="playlist_play"></button>
+
+                        </div>
+                        <div class="block_playlist_text">
+                            <h3><a href='{% url "playlist" playlist.share %}'>{{playlist.name_playlist}}</a></h3>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <h1>Чарт</h1>
+
+            <div class="songs_full">
+                {% for mus in music %}
+                <div class="track">
+                    <div class="shadow_track">
+                        <p class="name_song">{{mus.name_song}}</p>
+                        {% if mus.feat %}
+                            <a href="artist_page.html" class="name_artist">{{mus.avtor}} feat. {{mus.feat}}</a>
+                        {% else %}
+                            <a href="artist_page.html" class="name_artist">{{mus.avtor}}</a>
+                        {% endif %}
+                        <button value="val_play1"><a href="#" download="/media/{{mus.song_path}}"><img src="{% static 'profile_user/img/donwload.png' %}"></a></button>
+<!--                        <form style="display: inline" method="get" >-->
+<!--                            {% csrf_token %}-->
+                        {% if request.user.is_authenticated %}
+                            <button value="{{mus.pk}}" style="display: inline" class="fuck_button_add" name="add_music_user" id="add_music_user">
+                                <img class="plus_mus" style="margin-right: 5px;" src="{% static 'profile_user/img/add_song_user.png' %}">
+                            </button>
+                            <button value="{{mus.pk}}" style="display: none" class="delete_song_by_user" name="add_music_user">
+                                <div style="width: 20px;height: 6px;background: #E0DFDF; margin-top: 10px;margin-right: 5px;"></div>
+                            </button>
+                        {% else %}
+                            <a href="{% url 'login' %}"><button value="{{mus.pk}}" style="display: inline" class="fuck_button_add" name="add_music_user" id="add_music_user">
+                                <img class="plus_mus" style="margin-right: 5px;" src="{% static 'profile_user/img/add_song_user.png' %}">
+                            </button></a>
+                        {% endif %}
+<!--                        </form>-->
+                        <div class="time_track2">2:33</div>
+                    </div>
+                    <div class="photo_track">
+                        <img class="photo_track_img" src="/media/{{mus.photo_song}}">
+                        <div class="black_img">
+                            <button value="/media/{{mus.song_path}}" name="{{mus.avtor}} - {{mus.name_song}}" id="{{ forloop.counter }}" class="buter_track2"></button>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+            <h1>Новости в мире музыки</h1>
+
+            <div class="slider_news">
+                <a class="previous"></a>
+                <a class="next"></a>
+                <div class="block_news" id="slide_1">
+                    <div class="news">
+                        <h2><a href="news.html">Name news</a></h2>
+                        <img src="{% static 'profile_user/img/z4wN1DUfpkI.jpg' %}">
+                        <p>Не следует, однако, забывать о том, что постоянный
+                            количественный рост и сфера нашей активности
+                            позволяет оценить значение дальнейших
+                            направлений развитая...</p>
+                        <a href="news.html"><div class="button_news_link">Читать дальше</div></a>
+                    </div>
+
+                </div>
+                <div class="block_news" id="slide_2" style="display: none">
+                    <div class="news">
+                        <h2><a href="news.html">Name news</a></h2>
+                        <img src="{% static 'profile_user/img/7b-jCoSyNis.jpg' %}">
+                        <p>Не следует, однако, забывать о том, что постоянный
+                            количественный рост и сфера нашей активности
+                            позволяет оценить значение дальнейших
+                            направлений развитая...</p>
+                        <a href="news.html"><div class="button_news_link">Читать дальше</div></a>
+                    </div>
+                </div>
+                <div class="block_news" id="slide_3" style="display: none">
+                    <div class="news">
+                        <h2><a href="news.html">Name news</a></h2>
+                        <img src="{% static 'profile_user/img/CbLa3jkbP2o.jpg' %}">
+                        <p>Не следует, однако, забывать о том, что постоянный
+                            количественный рост и сфера нашей активности
+                            позволяет оценить значение дальнейших
+                            направлений развитая...</p>
+                        <a href="news.html"><div class="button_news_link">Читать дальше</div></a>
+                    </div>
+                </div>
+                <div class="block_news" id="slide_4" style="display: none">
+                    <div class="news">
+                        <h2><a href="news.html">Name news</a></h2>
+                        <img src="{% static 'profile_user/img/WZmtgVtvx24.jpg' %}">
+                        <p>Не следует, однако, забывать о том, что постоянный
+                            количественный рост и сфера нашей активности
+                            позволяет оценить значение дальнейших
+                            направлений развитая...</p>
+                        <a href="news.html"><div class="button_news_link">Читать дальше</div></a>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+
+

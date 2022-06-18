@@ -1,0 +1,67 @@
+{% extends 'profile_user/base_index.html' %}
+
+{% load static %}
+{% block title %}{{playlist.name_playlist}}{% endblock %}
+
+
+        {% block content %}
+            <a href="playlists_user.html" ><h1>{{playlist.name_playlist}}</h1></a>
+            <div class="playlists">
+                <div class="block_playlist">
+                    <div class="ten2">
+                        <img class="ten" src="/media/{{playlist.photo}}">
+                    </div>
+                    <div class="ten"></div>
+                    <div class="photo_playlist">
+
+                        <img src="/media/{{playlist.photo}}">
+                        <button value="A-AP Rocky-Wassup-kissvk.com" class="playlist_play"></button>
+
+                    </div>
+                    <div class="block_playlist_text">
+                        <h3><a href="playlist.html">{{playlist.name_playlist}}</a></h3>
+                    </div>
+                </div>
+                <div class="songs_full3">
+                    {% for m in playlist.music.all %}
+                        <div class="track">
+                            <div class="shadow_track2">
+                                <p class="name_song2">{{m.name_song}}</p>
+                                {% if m.feat %}
+                                    <a href="artist_page.html" class="name_artist">{{m.avtor}} feat. {{m.feat}}</a>
+                                {% else %}
+                                    <a href="artist_page.html" class="name_artist">{{m.avtor}}</a>
+                                {% endif %}
+                                <button value="val_play1"><a href="#" download="/media/{{m.song_path}}"><img src="{% static 'profile_user/img/donwload.png' %}"></a></button>
+<!--                        <form style="display: inline" method="get" >-->
+<!--                            {% csrf_token %}-->
+                        {% if request.user.is_authenticated %}
+                            <button value="{{m.pk}}" style="display: inline" class="fuck_button_add" name="add_music_user" id="add_music_user">
+                                <img class="plus_mus" style="margin-right: 5px;" src="{% static 'profile_user/img/add_song_user.png' %}">
+                            </button>
+                            <button value="{{m.pk}}" style="display: none" class="delete_song_by_user" name="add_music_user">
+                                <div style="width: 20px;height: 6px;background: #E0DFDF; margin-top: 10px;margin-right: 5px;"></div>
+                            </button>
+                        {% else %}
+                            <a href="{% url 'login' %}"><button value="{{m.pk}}" style="display: inline" class="fuck_button_add" name="add_music_user" id="add_music_user">
+                                <img class="plus_mus" style="margin-right: 5px;" src="{% static 'profile_user/img/add_song_user.png' %}">
+                            </button></a>
+                        {% endif %}
+                                <div class="time_track">2:33</div>
+
+                            </div>
+                            <div class="photo_track">
+                                <img class="photo_track_img" src="/media/{{m.photo_song}}">
+                                <div class="black_img">
+                                    <button value="/media/{{m.song_path}}" id="play1" class="buter_track2"></button>
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+        {% endblock %}
+

@@ -1,0 +1,123 @@
+{% extends 'profile_user/base_index.html' %}
+
+{% load static %}
+{% block title %}{{Поиск}}{% endblock %}
+        {% block content %}
+            {% if f %}
+                <h1>Пользователи</h1>
+                <div class="atists_block">
+                {% for fe in f %}
+                    <a href="{% url 'profile' fe.username %}" ><div class="atist">
+                        <div class="ten2">
+                            {% if fe.profile.photo %}
+                            <img class="ten" src="/media/{{fe.profile.photo}}">
+                            {% else %}
+                            <img src="{% static '/profile_user/img/pepe_user_photo.jpg' %}">
+                            {% endif %}
+
+                        </div>
+                        <div class="artis_photo">
+                            <img src="/media/{{fe.profile.photo}}">
+                        </div>
+                        <h3>{{fe.username}}</h3>
+                    </div></a>
+                {% endfor %}
+                </div>
+            {% else %}
+
+            {% endif %}
+            {% if music %}
+            <h1>Музыка</h1>
+            <div class="songs_full">
+                {% for mus in music %}
+                <div class="track">
+                    <div class="shadow_track">
+                        <p class="name_song">{{mus.name_song}}</p>
+                        {% if mus.feat %}
+                            <a href="artist_page.html" class="name_artist">{{mus.avtor}} feat. {{mus.feat}}</a>
+                        {% else %}
+                            <a href="artist_page.html" class="name_artist">{{mus.avtor}}</a>
+                        {% endif %}
+                        <button value="val_play1"><a href="#" download="/media/{{mus.song_path}}"><img src="{% static 'profile_user/img/donwload.png' %}"></a></button>
+<!--                        <form style="display: inline" method="get" >-->
+<!--                            {% csrf_token %}-->
+                        {% if request.user.is_authenticated %}
+                            <button value="{{mus.pk}}" style="display: inline" class="fuck_button_add" name="add_music_user" id="add_music_user">
+                                <img class="plus_mus" style="margin-right: 5px;" src="{% static 'profile_user/img/add_song_user.png' %}">
+                            </button>
+                            <button value="{{mus.pk}}" style="display: none" class="delete_song_by_user" name="add_music_user">
+                                <div style="width: 20px;height: 6px;background: #E0DFDF; margin-top: 10px;margin-right: 5px;"></div>
+                            </button>
+                        {% else %}
+                            <a href="{% url 'login' %}"><button value="{{mus.pk}}" style="display: inline" class="fuck_button_add" name="add_music_user" id="add_music_user">
+                                <img class="plus_mus" style="margin-right: 5px;" src="{% static 'profile_user/img/add_song_user.png' %}">
+                            </button></a>
+                        {% endif %}
+<!--                        </form>-->
+                        <div class="time_track2">2:33</div>
+                    </div>
+                    <div class="photo_track">
+                        <img class="photo_track_img" src="/media/{{mus.photo_song}}">
+                        <div class="black_img">
+                            <button value="/media/{{mus.song_path}}" name="{{mus.avtor}} - {{mus.name_song}}" id="{{ forloop.counter }}" class="buter_track2"></button>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+
+            {% endif %}
+            {% if article %}
+            <h1>Журнал</h1>
+            <div class="songs_full" style="width:643px;height: 800px;left:0;float:left;">
+                {% for inf in article %}
+                <div class="block_news_magazine">
+                    <div class="user_magazine_list" style="background-color: gray;width:95%;margin-left: 4%;margin-top: 2%;">
+                        <div class="photo_avtor_news" style="float: left;">
+                            <a href="{% url 'profile' inf.name_user %}"><img src="/media/{{inf.name_user.profile.photo}}"></a>
+                        </div>
+                        <a href="{% url 'profile' inf.name_user %}" style="text-decoration: none;"><h3 style="font-size: 24px;font-family: 'Roboto';
+                        font-style: normal; color: #FFFFFF;font-weight: 100;float: left;">{{inf.name_user}}</h3></a>
+                        <h5 style="font-size: 16px;font-family: 'Roboto';
+                        font-style: normal; color: #FFFFFF;font-weight: 100; display: inline-block;margin: 0;margin-top: 7px;float:right;">23.05.2021</h5>
+                    </div>
+                    <div class="article_h1_magazine" style="width:95%;margin-left: -17.5%;margin-top: 2%;display: inline-block;">
+                        <a href="{% url 'article_page' inf.share %}"><h1 style="font-size: 24px;left:0;float:left;-webkit-line-clamp: 1;
+                        display: -webkit-box;-webkit-box-orient: vertical;overflow: hidden;width: 70%;">{{inf.title}}</h1></a>
+                        <h5 style="font-size: 16px;font-family: 'Roboto';
+                        font-style: normal; color: #FFFFFF;font-weight: 100; display: inline-block;margin: 0;margin-top: 7px;float: right;">{{inf.genre}}</h5>
+
+                    </div>
+                    <div class="magazine_block">
+                        <a href="{% url 'article_page' inf.share %}"><div class="magazine_news">
+                            <img src="/media/{{inf.photo}}">
+                        </div></a>
+                    </div>
+                        <p style="margin-left: 4%;">{{inf.text}}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+
+            {% endif %}
+<!--            <form class="form_artist">-->
+<!--                <div class="search_artis">-->
+<!--                    <input class="inp_text2" type="text" name="search" size="40" placeholder="Поиск артиста.....">-->
+<!--                </div>-->
+<!--                <select class="genre_artist_page" name="theme" required="required">-->
+<!--                    <option>Жанр</option>-->
+<!--                    <option>Транс</option>-->
+<!--                    <option>Хип-хоп</option>-->
+<!--                    <option>Драм-н-бейс</option>-->
+<!--                    <option>Name</option>-->
+<!--                </select>-->
+<!--                <select class="genre_artist_page" name="theme" required="required">-->
+<!--                    <option>Пол</option>-->
+<!--                    <option>Мужской</option>-->
+<!--                    <option>Женский</option>-->
+<!--                </select>-->
+<!--            </form>-->
+<!--            <div class="line_artis"></div>-->
+        {% endblock %}

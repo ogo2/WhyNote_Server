@@ -1,0 +1,59 @@
+{% extends 'profile_user/base_index.html' %}
+
+{% load static %}
+{% block title %}{{Статьи}}{% endblock %}
+
+        {% block content %}
+            <h1>Журнал</h1>
+            <div class="songs_full" style="width:643px;height: 800px;left:0;float:left;">
+                {% for inf in article %}
+                <div class="block_news_magazine">
+                    <div class="user_magazine_list" style="background-color: gray;width:95%;margin-left: 4%;margin-top: 2%;">
+                        <div class="photo_avtor_news" style="float: left;">
+                            <a href="{% url 'profile' inf.name_user %}"><img src="/media/{{inf.name_user.profile.photo}}"></a>
+                        </div>
+                        <a href="{% url 'profile' inf.name_user %}" style="text-decoration: none;"><h3 style="font-size: 24px;font-family: 'Roboto';
+                        font-style: normal; color: #FFFFFF;font-weight: 100;float: left;">{{inf.name_user}}</h3></a>
+                        <h5 style="font-size: 16px;font-family: 'Roboto';
+                        font-style: normal; color: #FFFFFF;font-weight: 100; display: inline-block;margin: 0;margin-top: 7px;float:right;">23.05.2021</h5>
+                    </div>
+                    <div class="article_h1_magazine" style="width:95%;margin-left: -17.5%;margin-top: 2%;display: inline-block;">
+                        <a href="{% url 'article_page' inf.share %}"><h1 style="font-size: 24px;left:0;float:left;-webkit-line-clamp: 1;
+                        display: -webkit-box;-webkit-box-orient: vertical;overflow: hidden;width: 70%;">{{inf.title}}</h1></a>
+                        <h5 style="font-size: 16px;font-family: 'Roboto';
+                        font-style: normal; color: #FFFFFF;font-weight: 100; display: inline-block;margin: 0;margin-top: 7px;float: right;">{{inf.genre}}</h5>
+
+                    </div>
+                    <div class="magazine_block">
+                        <a href="{% url 'article_page' inf.share %}"><div class="magazine_news">
+                            <img src="/media/{{inf.photo}}">
+                        </div></a>
+                    </div>
+                        <p style="margin-left: 4%;">{{inf.text}}</p>
+                </div>
+                {% endfor %}
+            </div>
+<!--            <div class="magazine_block">-->
+<!--                {% for inf in article %}-->
+<!--                <a href="{% url 'article_page' inf.share %}"><div class="magazine_news">-->
+<!--                    <img src="/media/{{inf.photo}}">-->
+<!--                    <div class="ten_magazine"></div>-->
+<!--                    <div class="text_block_magazine">-->
+<!--                        <h1>{{inf.title}}</h1>-->
+<!--                        <p>{{inf.text}}</p>-->
+<!--                    </div>-->
+<!--                </div></a>-->
+<!--                {% endfor %}-->
+
+<!--            </div>-->
+            <div class="music_menu2">
+                <ul>
+                    <li><button class="music_but_menu">Новости</button></li>
+                    <li><button class="music_but_menu">Декодинг</button></li>
+                    <li><button class="music_but_menu">Рецензия на релиз</button></li>
+                    <li><button class="music_but_menu">Перевод песни</button></li>
+                    <li><button class="music_but_menu">Мои записи</button></li>
+
+                </ul>
+            </div>
+        {% endblock %}

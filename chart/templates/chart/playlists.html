@@ -1,0 +1,33 @@
+{% extends 'profile_user/base_index.html' %}
+
+{% load static %}
+{% block title %}{{user.username}}{% endblock %}
+
+
+        {% block content %}
+            <a href="playlists_chart.html" ><h1>Плейлисты</h1></a>
+            <div class="playlists">
+<!--                <a class="previous_playlist"></a>-->
+<!--                <a class="next_playlist"></a>-->
+                {% for playlist in playlists %}
+                    <div class="block_playlist">
+                        <div class="ten2">
+                            <img class="ten" src="/media/{{playlist.photo}}">
+                        </div>
+                        <div class="ten"></div>
+                        <div class="photo_playlist">
+
+                            <img src="/media/{{playlist.photo}}">
+                            <button value="A-AP Rocky-Wassup-kissvk.com" class="playlist_play"></button>
+
+                        </div>
+                        <div class="block_playlist_text">
+                            <h3><a href='{% url "playlist" playlist.share %}'>{{playlist.name_playlist}}</a></h3>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+        {% endblock %}
+

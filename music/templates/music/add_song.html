@@ -1,0 +1,65 @@
+{% extends 'profile_user/base.html' %}
+
+{% load static %}
+{% block title %}{{user.username}}{% endblock %}
+{% block content %}
+
+<form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+
+        <div required class="form_donwload_song">
+<!--            <div class="block_up_photo_upload_img2">-->
+<!--            {{form.photo}}-->
+<!--&lt;!&ndash;            <input id="input__file" type="file" name="file" class="up_photo"/>&ndash;&gt;-->
+<!--            <label for="id_photo" class="upload_file_img33">-->
+<!--                <span class="blyat">-->
+<!--                    <img class="icon_upload_img_track" src="{% static 'profile_user/img/upload_song.png' %}" alt="Выбрать фото" ></span>-->
+<!--                <span class="upload-button-text2">Загрузить изображение</span>-->
+<!--            </label>-->
+<!--            </div>-->
+
+
+            <ul>
+                <li><label for="name_song_input">Название песни</label></li>
+                <li><li>{{form.name_song}}</li></li>
+                <li><label for="name_song_input">Автор песни</label></li>
+                <li>{{form.avtor}}</li>
+                <li><label for="name_song_input">Соавтор песни (необязательно)</label></li>
+                <li><li>{{form.feat}}</li></li>
+                <div>
+                    <label  for="{{ forms.genre.id_for_label }}" class="email_registr">Жанр</label>
+                </div>
+                {{ form.genre }}
+
+
+            </ul>
+                <div class="upload_block_button">
+                    <div class="block_donwl_audio">
+                        <div class="block_up_photo2">
+                            {{ form.song_path }}
+<!--                            <input id="input__file" type="file" name="file" class="up_photo"/>-->
+                            <label for="input__file" class="input__file-button2">
+                                <span class="input__file-icon-wrapper">Загрузить аудиофайл</span>
+                                <!--                        <span class="input__file-button-text">Выберите фото</span>-->
+                            </label>
+                        </div>
+                    </div>
+                    <div class="block_donwl_audio">
+                        <div class="block_up_photo3">
+                            {{form.photo_song}}
+<!--                            <input id="input__file" type="file" name="file" class="up_photo"/>-->
+                            <label for="input__file2" class="input__file-button2">
+                                <span class="input__file-icon-wrapper">Загрузить обложку</span>
+                                <!--                        <span class="input__file-button-text">Выберите фото</span>-->
+                            </label>
+                        </div>
+                    </div>
+<!--                    <div class="otpravit_but">-->
+<!--                        <p><button type="submit" class="otpravit">Опубликовать</button></p>-->
+<!--                    </div>-->
+                </div>
+            <button type="submit" class="state_button">Опубликовать</button>
+        </div>
+</form>
+{% endblock %}

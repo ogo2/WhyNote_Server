@@ -1,0 +1,50 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'profile_user/css/assets.css' %}">
+    <title>Регистрация</title>
+</head>
+<body>
+    <div class="content_zone2">
+        <div class="fon_registr">
+            <div class="logo_registr">
+                <a href="{% url 'index' %}"><img src="{% static 'profile_user/img/logo_registr.png' %}"></a>
+            </div>
+            <h1>Регистрация</h1>
+            <form method="post" enctype="multipart/form-data">
+                <div style="width: 75%;" class="form_registr">
+                                {% csrf_token %}
+                    <div class="block_up_photo_upload_img2" style="margin-top: -0.5%;">
+                        <div>
+                        <label  for="{{ form.about_me.id_for_label }}" class="email_registr">Фото профиля</label>
+                    </div>
+                        {{form.photo}}
+            <!--            <input id="input__file" type="file" name="file" class="up_photo"/>-->
+                        <label for="id_photo" class="upload_file_img33">
+                            <span class="blyat">
+                                <img class="icon_upload_img_track" src="{% static 'profile_user/img/upload_song.png' %}" alt="Выбрать фото" ></span>
+                            <span class="upload-button-text2">Загрузить изображение</span>
+                        </label>
+                    </div>
+                    <div>
+                        <label  for="{{ form.about_me.id_for_label }}" class="email_registr">{{ form.about_me.label }}</label>
+                    </div>
+                    {{ form.about_me }}
+                    <div>
+                        <label  for="{{ forms.country.id_for_label }}" class="email_registr">Страна</label>
+                    </div>
+                    {{ form.country }}
+                    <div>
+                    <button class="but_registr" style="margin-top: 95px;float: left;" value="" name="dzen" type="submit">Зарегистрироваться</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
